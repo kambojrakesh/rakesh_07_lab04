@@ -1,0 +1,8 @@
+---
+title: "My First Markdown"
+output:
+  html_document: default
+  pdf_document: default
+date: "`r Sys.Date()`"
+---
+This is my first markdown document.

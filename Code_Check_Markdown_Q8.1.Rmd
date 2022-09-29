@@ -1,0 +1,34 @@
+---
+title: "My First Markdown Test"
+output:
+  pdf_document: default
+  html_document: default
+date: "`r Sys.Date()`"
+---
+This is my first markdown document.
+
+Load libraries:
+
+```{r}
+library(datasets)
+data(airquality)
+summary(airquality)
+```
+
+Pair plot of the data:
+
+```{r}
+pairs(airquality)
+```
+Count number of even number in list
+```{r}
+lst <- c(2,50,3,9,8,11,6)
+count_val <- 0
+for (val in lst) {
+  if(val %% 2 == 0)  {
+      count_val = count_val+1
+  }
+}
+print(count_val)
+```
+

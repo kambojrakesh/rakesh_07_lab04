@@ -1,12 +1,10 @@
 ---
-title: "Lab 4 - Introduction to RStudio and R Markdown. Presentations"
+title: "Lab 4.1 - Introduction to RStudio and R Markdown. Presentations"
+author: "Rakesh Kumar"
+date: "September 27, 2022"
 output:
-  pdf_document:
-    toc: yes
-  html_document:
-    toc: yes
-    author: "Rakesh Kumar"
-    date: "September 27, 2022"
+  html_document: default
+  pdf_document: default
 ---
 
 <!-- This is a comment in R Markdown (and regular markdown, such as in Jupyter)-->
@@ -31,7 +29,7 @@ If you need help as you use R Markdown in this lab and others in the future, con
 
 The below is a code chunk, but instead of using the `r` engine we're creating and alert block that will make the question show up with a blue background in the HTML output. Unfortunately, this creates and error when exporting to PDF, so it can only be used for HTML.
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 ## Submission Instructions
 rubric={mechanics:2}
 
@@ -51,7 +49,7 @@ You receive mark for submitting your lab correctly, please follow these instruct
 - Include a clickable link to your GitHub repo for the lab just below this cell (it should look something like this https://github.ubc.ca/MDS-2022-23/DSCI_521_labX_yourcwl.
 ```
 
-YOUR LAB GITHUB REPO LINK GOES HERE
+<https://github.com/kambojrakesh/rakesh_07_lab04>
 
 ## Editing R Markdown documents
 
@@ -61,18 +59,16 @@ This document is called an R Markdown document. It is a literate code document, 
 
 In a R Markdown document any line of text not in a code chunk (like this line of text) will be formatted using Markdown. Similar to JupyterLab, you can also use HTML and LaTeX here to do more advanced formatting. To run a code chunk, you can press the green play button in the top right corner of the chunk.
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 1
 rubric={correctness:1}
 
 To render the HTML files we are going to create, the first step is to activate GitHub pages.
-
-
 ```
 
 <https://kambojrakesh.github.io/rakesh_07_lab04/>
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 2
 rubric={mechanics:1}
 
@@ -93,7 +89,7 @@ for (val in temp) {
 print(count)
 ```
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 3
 rubric={mechanics:1}
 
@@ -104,7 +100,7 @@ Don't forget to knit/render the document
 after you make this change to ensure everything is still working.
 ```
 
-```{r Event number}
+```{r count Event number program}
 temp <- c(2,50,3,9,8,11,6)
 count <- 0
 for (val in temp) {
@@ -115,7 +111,7 @@ for (val in temp) {
 print(count)
 ```
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 4
 rubric={mechanics:1,reasoning:1}
 
@@ -124,15 +120,16 @@ Write out in your own words what the code chunk option is doing.
 ```
 
 ```{r Code chunk option, warning=FALSE}
-# Code chunk options helps to customize chunk behavior, like a chunk is evaluated, whether we want to include rendered document.
 
 ```
+
+Code chunk options helps to customize chunk behavior, like a chunk is evaluated, whether we want to include rendered document.
 
 #### Multiple code chunk options
 
 To have multiple code chunk options you separate them by a comma. For example, if in addition to suppressing warnings, we want to run the code but not output the results, then we can add the `include = FALSE` argument to the code chunk after the `warning = FALSE` option.
 
-```{r Even checker, warning=FALSE, include=FALSE}
+```{r Even checker, include=FALSE, warning=FALSE}
 lst <- c(2,50,3,9,8,11,6)
 count_val <- 0
 for (val in lst) {
@@ -141,15 +138,13 @@ for (val in lst) {
   }
 }
 print(count_val)
-
-
 ```
 
 include = FALSE prohibits code and results from being included in the final file.
 
-include = False We can temporarily disable the warnings to prevent package loading alerts.
+include = False we can temporarily disable the warnings to prevent package loading alerts.
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 5
 rubric={mechanics:1,reasoning:1}
 
@@ -158,11 +153,28 @@ At least one must be different to the ones mentioned above.
 Write in your own words what each code chunk option is doing.
 ```
 
-```{r Event number counter, cache=FALSE, echo=FALSE}
-#echo : display the code along with the result
-#cache: helps to save the reuslts for the future.
+```{r Event number counter program, echo=TRUE, cache=FALSE}
 
+num = 10
+if((num %% 2) == 0) {
+  print(paste(num,"is Even number"))
+} else {
+  print(paste(num,"is Odd number"))
+}
 ```
+
+```{r paste string program, error=FALSE, warning=FALSE}
+
+print(paste("Hi","Hello ","World"))
+```
+
+echo : display the code along with the result in knit report.
+
+cache: helps to save the reuslts for the future.
+
+error: knit will not display error generated in final report.
+
+warning: knit not display any warning the knit report.
 
 ### 1.5. YAML Header and document output options
 
@@ -196,7 +208,7 @@ Most important from a workflow perspective is **output**. Possible output option
 -   `output: word_document`
 -   `output: xaringan::moon_reader` (xaringan presentation - html)
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 6
 rubric={mechanics:1}
 
@@ -205,7 +217,7 @@ and edit it so that you include an `author` (yourself) and a `date` (lab due dat
 Include what you added below here as well as a fenced Markdown code block.
 ```
 
-\`\`\`date`: (Rakesh Kumar), author`: (September 27, 2022)\`\`\`
+    author: Rakesh Kumar and date : September 27, 2022
 
 ### Creating R Markdown documents
 
@@ -213,7 +225,7 @@ You can use the "File" menu inside RStudio to create new R Markdown documents by
 
 To create a written report, we generally recommend using the default `output: html_document` as it is easier to read than PDF (note - LaTeX does not render nicely in such documents sadly, so if you are using a lot of LaTeX then you may want to choose `output: pdf_document`). If you want to create an `.md` file to publish on GitHub, it is recommend to instead use `output: github_document`. To get this from the menu above you need to navigate to the "From Template" option on the left panel and then select "GitHub Document (Markdown)".
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 7
 rubric={mechanics:2}
 
@@ -233,9 +245,13 @@ to the GitHub repository for this lab
 and paste the two links below this question.
 ```
 
-YOUR ANSWER GOES HERE
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/First_Markdown_document_Q7.1.html>
 
-```{block, type="alert alert-info"}
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/First_Markdown_document_Q7.2.html>
+
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/First_Markdown_document_Q7.2.pdf>
+
+```{block type="alert alert-info"}
 #### Question 8
 rubric={mechanics:6}
 
@@ -252,9 +268,13 @@ rubric={mechanics:6}
    Paste a link to these files as your answer below.
 ```
 
-YOUR ANSWER GOES HERE
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/Code_Check_Markdown_Q8.1.pdf>
 
-```{block, type="alert alert-info"}
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/Code_Check_Markdown_Q8.1.html>
+
+<https://github.com/kambojrakesh/rakesh_07_lab04/blob/main/Code_Check_Markdown_Q8.1.Rmd>
+
+```{block type="alert alert-info"}
 #### Question 9 (Optional)
 rubric={mechanics:1,reasoning:1}
 
@@ -268,7 +288,7 @@ rubric={mechanics:1,reasoning:1}
 
 YOUR ANSWER GOES HERE
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### Question 10
 rubric={mechanics:6}
 
@@ -293,9 +313,9 @@ rubric={mechanics:6}
 5. Activate GitHub pages and paste the link below.
 ```
 
-YOUR ANSWER GOES HERE
+<https://kambojrakesh.github.io/rakesh_07_lab04/Markdown_Presentation_Q10.html#1>
 
-```{block, type="alert alert-info"}
+```{block type="alert alert-info"}
 #### (Challenging) Question 11
 rubric={reasoning}
 
@@ -308,4 +328,18 @@ for presentations and reports.
 Include advantages and disadvantages for each.
 ```
 
-YOUR ANSWER GOES HERE
+Reports and presentations play a very vital role in the Data Science field. Different tools like R Markdown, Jupyter, Word, and PowerPoint can be used for the purpose. Both of these types have there on pros and cons.
+
+The report or presentation must have the following points what we want to analyze, what happened, and what we should do about it.
+
+Reproducible tools exist to develop open-source software, open standards, and services for interactive computing across dozens of programming languages. These tools are mainly ready to get started. We can try some of this software via browser as well.
+
+Non-reproducible tools enable us to produce elegant slideshow presentations, sophisticated pitch decks, and a robust presentation creator to communicate your message.
+
+Advantages and Disadvantages of reproducible tools
+
+Reproducible tools are convenient when we do not have a straightforward end procedure and are still in the prototype phase of our automated workflow. The disadvantages of these tools are that they take long asynchronous jobs and are challenging to test. We have to perform operations carefully, and proficiency in software is required.
+
+Advantages and Disadvantages of non-reproducible tools
+
+Non-reproducible tools make it simple to communicate to a big audience while maintaining eye contact by simply forwarding the slides with a keystroke and doing away with the requirement for handouts to help the audience understand the information. The main disadvantage like too many features can get overwhelming and most parts usually remain unknown.
